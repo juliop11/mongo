@@ -1,9 +1,9 @@
 let mongoose = require("mongoose");
-let User = require("./userSchema");
-let Profile = require("./profileSchema");
-let Creedentials = require("./creedentialsSchema");
+let User = require("./esquemaUser");
+let Profile = require("./esquemaProfile");
+let Creedentials = require("./esquemaCreedentials");
 
-mongoose.connect('mongodb+srv://julioperez:Puertollano1@cluster0.skczjsh.mongodb.net/test',
+mongoose.connect('mongodb+srv://julioperez:Puertollano1@cluster0.skczjsh.mongodb.net/codenotch',
     { useNewUrlParser: false, useUnifiedTopology: false })
 
 let userDocument = new User({
@@ -24,7 +24,7 @@ userDocument.save()
 let profileDocument = new Profile({
     name: "carlos",
     surname: "lopez",
-    dateOfBirth: 1990 - 05 - 12,
+    dateOfBirth: new Date(1940, 05, 12),
     comments: "Hola que tal",
     rol: "trabajador"
 });
@@ -37,6 +37,38 @@ profileDocument.save()
     console.log(err)
 })
 
+profileDocument = new Profile({
+    name: "carlos",
+    surname: "lopez",
+    dateOfBirth: new Date(1992, 05, 12),
+    comments: "Hola que tal",
+    rol: "trabajador"
+});
+
+profileDocument.save()
+.then ((data)=>{
+    console.log(data);
+})
+.catch((err)=>{
+    console.log(err)
+})
+
+
+profileDocument = new Profile({
+    name: "JUanita",
+    surname: "lopez",
+    dateOfBirth: new Date(1992, 05, 12),
+    comments: "Hola que tal",
+    // rol: "trabajador"
+});
+
+profileDocument.save()
+.then ((data)=>{
+    console.log(data);
+})
+.catch((err)=>{
+    console.log(err)
+})
 
 
 let creedentialsDocument = new Creedentials({

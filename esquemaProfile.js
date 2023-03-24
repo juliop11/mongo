@@ -6,7 +6,7 @@ const schemaProfile = new mongoose.Schema({
         enum: ["carlos", "rafa", "carla"]
     },
     surname: {
-        type: Number
+        type: String
     },
     dateOfBirth: {
         type: Date
@@ -23,7 +23,7 @@ const schemaProfile = new mongoose.Schema({
 
 schemaProfile.pre('save', function (next) {
 
-    if (this.dateOfBirth > 1989 - 01 - 01 && this.dateOfBirth < 1999 - 01 - 01) {
+    if (this.dateOfBirth > new Date(1989, 1,1) && this.dateOfBirth < new Date(1999, 1,1)) {
 
         console.log("Tu edad esta entre los 24 y los 34 años");
         next();
