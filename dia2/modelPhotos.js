@@ -64,13 +64,24 @@ let users = [
 
 
 ////DADO UN USUARIO Y UN TITULO DE FOTO ELIMINAR SU FOTO
-Fotos.deleteOne({ nombre: "luis", foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYSOP1ohUd0BosUWExISEORCCgI_DpU0VhCg&usqp=CAU" }, { foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYSOP1ohUd0BosUWExISEORCCgI_DpU0VhCg&usqp=CAU", verified: false })
-    .then((dato) => {
-        console.log("La foto a sido eliminada correctamente");
-        console.log(dato);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+// Fotos.deleteOne({ nombre: "rosa", foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS59CB6_0S9VZssN6dPeeqxI2iP5ZX7Xxp0wg&usqp=CAU" })
+//     .then((dato) => {
+//         console.log("La foto ha sido eliminada correctamente");
+//         console.log(dato);
+  
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
 
 
+////DADO UN USUARIO ELIMINAR TODAS SUS FOTOS
+// Fotos.deleteMany({ nombre: "rosa"})
+//     .then((dato) => {
+//         console.log("Se han sido eliminado todas las fotos");
+//         console.log(dato);
+  
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
