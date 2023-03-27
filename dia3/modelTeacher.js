@@ -49,12 +49,27 @@ let mark10 = new Marks({ date: new Date(2022, 12, 22), mark: 5, student_first_na
 
 
 ////Calcular la nota media de los alumnos de una asignatura concreta.
-Marks.aggregate([{$group: {"_id": null, "Nota Media": {"$avg": "$mark"}}}])
-.then((result) =>
-{
-    console.log(result);
-})
-.catch((error) =>
-{
-    console.log(error);
-})
+Marks.aggregate([
+    { $match: { subject_name: "matematicas" } },
+    { $group: { "_id": null, media: { "$avg": "$mark" } } }])
+    .then((result) => {
+        console.log(result[0].media);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+
+////Calcular el número total de alumnos que hay en el bootcamp incluyendo repetidos.
+Marks.aggregate([
+    { $group: { _id: null, sumar: { $sum: 1 } } }
+  ])
+  .then((result) => {
+    console.log("Número total de alumnos: " + result[0].sumar);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+  ////Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos.
+  
