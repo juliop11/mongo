@@ -42,7 +42,8 @@ let users = [
 
 
 ////DADO UN USUARIO OBTENER TODAS SUS FOTOS.
-// Fotos.findOne({ nombre: "luis" })
+// function obtenerFotos(nombre){
+// Fotos.findOne({ nombre: nombre })
 //     .then((users) => {
 
 //         console.log(users.foto);
@@ -50,8 +51,8 @@ let users = [
 //     .catch((err) => {
 //         console.log(err);
 //     })
-
-
+// }
+// obtenerFotos("luis")
 ////DADO EL TITULO DE UNA FOTO Y UNA DESCRIPCION, MODIFICAR SU DESCRIPCION.
 // Fotos.updateOne({ foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBiXjw6EN7hKm6_eSmFIRyO3gvA08iCnhJOA&usqp=CAU", descripcion: "Competir en la F1 es mi pasion" }, { descripcion: "Me gustan los coches", verified: false })
 //     .then((dato) => {
@@ -76,7 +77,8 @@ let users = [
 
 
 ////DADO UN USUARIO ELIMINAR TODAS SUS FOTOS
-// Fotos.deleteMany({ nombre: "rosa"})
+// function eliminarTodas(nombre){
+// Fotos.deleteMany({ nombre: nombre})
 //     .then((dato) => {
 //         console.log("Se han sido eliminado todas las fotos");
 //         console.log(dato);
@@ -85,3 +87,5 @@ let users = [
 //     .catch((err) => {
 //         console.log(err);
 //     })
+// }
+// eliminarTodas("bea")

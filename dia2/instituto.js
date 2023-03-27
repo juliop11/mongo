@@ -112,7 +112,8 @@ let student4 = new Students({ firstName: "Juan", lastName: "Gomez", marks: [mark
 //     });
 
 ////TODAS LAS NOTAS DE UN ALUMNO
-Students.findOne({ firstName: 'Samara' })
+function notasAlumno(name){
+Students.findOne({ firstName: name })
     .then((students) => {
         console.log("ESTAS SON LAS NOTAS DE SAMARA:");
         students.marks.forEach(mark => {
@@ -122,9 +123,12 @@ Students.findOne({ firstName: 'Samara' })
     .catch((err) => {
         console.error(err);
     });
+}
+notasAlumno("Samara")
 
 ////TODAS LAS ASIGNATURAS DE UN ALUMNO
-Students.findOne({ firstName: 'Samara' })
+function asignaturaAlumno(name){
+Students.findOne({ firstName: name })
     .then((students) => {
         console.log("ESTAS SON LAS ASIGNATURAS DE SAMARA:");
         students.marks.forEach(mark => {
@@ -134,9 +138,12 @@ Students.findOne({ firstName: 'Samara' })
     .catch((err) => {
         console.error(err);
     });
+}
+asignaturaAlumno("Samara");
 
 ////TODOS LOS PROFESORES DE UN ALUMNO
-Students.findOne({ firstName: 'Samara' })
+function profesAlumno(name){
+Students.findOne({ firstName: name })
     .then((students) => {
         console.log("ESTOS SON LOS PROFESORES DE SAMARA:");
         students.marks.forEach(mark => {
@@ -148,3 +155,5 @@ Students.findOne({ firstName: 'Samara' })
     .catch((err) => {
         console.error(err);
     });
+}
+profesAlumno("Samara")
