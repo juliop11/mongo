@@ -27,16 +27,7 @@ let mark6 = new Marks({ date: new Date(2023, 03, 04), mark: 6, student_first_nam
 let mark7 = new Marks({ date: new Date(2022, 11, 06), mark: 4, student_first_name: "Maria", student_last_name: "Vargas", group_name: "c", subject_name: "Ingles", teachers: [teacher4, teacher8] });
 let mark8 = new Marks({ date: new Date(2022, 08, 18), mark: 10, student_first_name: "Marta", student_last_name: "Mohedano", group_name: "d", subject_name: "Lengua", teachers: [teacher7] });
 let mark9 = new Marks({ date: new Date(2023, 01, 05), mark: 7, student_first_name: "Rafa", student_last_name: "Santos", group_name: "b", subject_name: "Musica", teachers: [teacher1, teacher6] });
-let mark10 = new Marks({ date: new Date(2022, 12, 22), mark: 5, student_first_name: "Carla", student_last_name: "Marquez", group_name: "a", subject_name: "fisica", teachers: [teacher10, teacher9] });
-
-// Teacher.insertMany([teacher1, teacher2, teacher3, teacher4, teacher5, teacher6, teacher7, teacher8, teacher9, teacher10])
-//     .then((data) => {
-//         console.log(data);
-//         console.log("Profesores añadidos correctamente");
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//     });
+let mark10 = new Marks({ date: new Date(2022, 12, 22), mark: 5, student_first_name: "Carla", student_last_name: "Marquez", group_name: "a", subject_name: "Fisica", teachers: [teacher10, teacher9] });
 
 // Marks.insertMany([mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9, mark10])
 //     .then((data) => {
@@ -49,27 +40,122 @@ let mark10 = new Marks({ date: new Date(2022, 12, 22), mark: 5, student_first_na
 
 
 ////Calcular la nota media de los alumnos de una asignatura concreta.
-Marks.aggregate([
-    { $match: { subject_name: "matematicas" } },
-    { $group: { "_id": null, media: { "$avg": "$mark" } } }])
-    .then((result) => {
-        console.log(result[0].media);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+// Marks.aggregate([
+//     { $match: { subject_name: "Matematicas" } },
+//     { $group: { "_id": null, 'media': { "$avg": "$mark" } } }])
+//     .then((result) => {
+//         console.log(result[0].media);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
 
 
 ////Calcular el número total de alumnos que hay en el bootcamp incluyendo repetidos.
-Marks.aggregate([
-    { $group: { _id: null, sumar: { $sum: 1 } } }
-  ])
-  .then((result) => {
-    console.log("Número total de alumnos: " + result[0].sumar);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// Marks.aggregate([
+//     { $group: { _id: null, sumar: { $sum: 1 } } }
+//   ])
+//   .then((result) => {
+//     console.log("Total de alumnos: " + result[0].sumar);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
-  ////Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos.
+////Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos.
+// Marks.aggregate([
+//     {
+//         $project: {
+//             _id: 0, student_first_name:1 , student_last_name:1 ,
+//         }
+//     }
+// ]).then((result) => {
+//     console.log(result);
+// }).catch((err) => {
+//     console.log(err);
+// });
+
+//Listar el nombre y los apellidos de todos los profesores incluyendo repetidos.
+// Marks.aggregate([ { $unwind: "$teachers"  },
+//                   { $project:{_id:0, "Nombre": "$teachers.teacher_first_name", "Apellido": "$teachers.teacher_last_name"}}      
+//     ])
+
+// .then((result) => {
+
+//     console.log(result);
+
+// }).catch((err) => {
+    
+//     console.log(err);
+// });
+
+////Mostrar el número total de alumnos por grupo ordenados por grupo en orden inverso al alfabeto.
+// Marks.aggregate([
+//     {
+//       $group: {
+//         _id: "$group_name", totalStudents: { $sum: 1 }
+//       }
+//     },
+//     {
+//       $sort: { _id: -1 }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
   
+////Obtén el top 5 de los nombres de las asignaturas cuya nota media sea mayor que 5.
+// Marks.aggregate([
+//     {
+//       $group: {
+//         _id: "$subject_name",
+//         avgGrade: { $avg: "$mark" }
+//       }
+//     },
+//     {
+//       $match: {
+//         avgGrade: { $gt: 5 }
+//       }
+//     },
+//     {
+//       $sort: {
+//         avgGrade: -1
+//       }
+//     },
+//     {
+//       $limit: 5
+//     },
+//     {
+//       $project: {
+//         _id: 0,
+//         subject: "$_id",
+//         avgGrade: 1
+//       }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
+  
+////Calcular el numero de profesores que hay por cada asignatura incluyendo repetidos.
+// Marks.aggregate([
+//     {
+//       $unwind: "$teachers" 
+//     },
+//     {
+//       $group: {
+//         _id: { subject_name: "$subject_name" },
+//         "Numero de profesores": { $sum: 1 } 
+//       }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
+
+
+////Obtén el nombre, apellido y la nota de los alumnos que tengan una nota mayor de 8 o la nota
+////tenga fecha del año pasado o anterior.  

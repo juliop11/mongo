@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const esquemaTeacher = require("./esquemaTeacher");
+const Teacher = require("./esquemaTeacher");
 
 const esquemaMarks = new mongoose.Schema(
     {
@@ -9,7 +9,7 @@ const esquemaMarks = new mongoose.Schema(
         student_last_name:String,
         group_name:String,
         subject_name:String,
-        teachers:["esquemaTeacher"]
+        teachers:[Teacher.schema]
     })
 
 
